@@ -27,9 +27,9 @@ for i = 1:numel(nii_folders)
     %save the generated xps
     xps_fn = mdm_xps_fn_from_nii_fn(nii_fn);
     mdm_xps_save(s.xps, xps_fn);
-    s_preprocessed = mdm_s_from_nii(nii_fn);
     
     %now powder
+    s_preprocessed = mdm_s_from_nii(nii_fn);
     s_pa = do_powder_average(s_preprocessed, nii_folder);
     mdm_s_mask(s_pa);
     
