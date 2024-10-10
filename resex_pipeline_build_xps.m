@@ -30,7 +30,7 @@ for i = 1:numel(nii_folders)
     
     %now powder
     s_preprocessed = mdm_s_from_nii(nii_fn);
-    s_pa = do_powder_average(s_preprocessed, nii_folder);
+    s_pa = resex_do_powder_average(s_preprocessed, nii_folder);
     mdm_s_mask(s_pa);
     
     %run fit
