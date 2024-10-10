@@ -16,7 +16,7 @@ for i = 1:numel(nii_folders)
     nii_folder = nii_folders{i};
     
     clear('s')
-   
+    %get gradient waveforms from dicom header and build xps using these
     [gwf, gwf_fn] = resex_get_gwf_from_dcm_hdr(nii_folder);
     s = resex_build_s_from_nii(nii_folder, gwf_fn);
     s = resex_add_gwf_to_s(s, gwf);
