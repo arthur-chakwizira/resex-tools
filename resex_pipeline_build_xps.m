@@ -14,6 +14,7 @@ for i = 1:numel(nii_folders)
     disp("Analysing " + num2str(i) + " of " + num2str(numel(nii_folders)) + " ...")
     
     nii_folder = nii_folders{i};
+    nii_fn = 'Subject_1\NII\s_dn_merge_mc.nii.gz'; %insert path to nii volume after denoising, de-Gibbs, merging, motion and eddy correction, etc...
     
     clear('s')
     %get gradient waveforms from dicom header and build xps using these
@@ -24,7 +25,6 @@ for i = 1:numel(nii_folders)
     s = resex_merge_xps(s);
     
     %save the generated xps
-    nii_fn = 'Subject_1\NII\s_dn_merge_mc.nii.gz'; %insert path to nii volume after denoising, de-Gibbs, merging, motion and eddy correction, etc...
     xps_fn = mdm_xps_fn_from_nii_fn(nii_fn);
     mdm_xps_save(s.xps, xps_fn);
     s_preprocessed = mdm_s_from_nii(nii_fn);
