@@ -1,4 +1,4 @@
-%pipeline for analysis of the RESEX data
+%pipeline for analysis of RESEX data
 %Author: Arthur Chakwizira, Medical Radiation Physics, Lund, Sweden
 
 addpath("functions")
