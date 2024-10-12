@@ -1,1 +1,1 @@
-Code for analysis of ResEx data. Run "resex_pipeline_build_xps" to get started.
+Code for analysis of ResEx data. Run "resex_pipeline" to get started.
