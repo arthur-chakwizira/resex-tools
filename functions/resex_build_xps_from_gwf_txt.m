@@ -46,12 +46,14 @@ time = (0:(numel(q)-1))*dt;
 
 %compute q4
 
-xps.q4 = repmat(time*0, xps.n, 1);
+xps.q4 = cell(xps.n, 1);
+xps.time = cell(xps.n, 1);
 for c = 1:xps.n
     tmp_b = xps.b(c);
     if tmp_b == 0; continue; end
     tmp_q = q*sqrt(tmp_b/b);
-    xps.q4(c,:) = (1/tmp_b^2)*resex_mc_correlate(tmp_q'.^2, tmp_q'.^2, dt);
+    xps.q4{c} = (1/tmp_b^2)*resex_mc_correlate(tmp_q'.^2, tmp_q'.^2, dt);
+    xps.time{c} = time;
 end
 
 %compute Gamma and Vomega
@@ -59,7 +61,7 @@ end
 xps.Gamma = ones(xps.n,1)*gam;
 xps.Vomega = ones(xps.n,1)*vom;
 xps.dt = ones(xps.n,1)*dt;
-xps.time = repmat(time, xps.n, 1);
+% xps.time = repmat(time, xps.n, 1);
 
 %check
 mdm_xps_check(xps);
