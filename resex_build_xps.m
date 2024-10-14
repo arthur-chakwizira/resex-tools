@@ -1,4 +1,5 @@
 %build xps files for all resex nifti volumes using the gwf txt files
+addpath('functions')
 
 
 nii_fn_list = {'resex_1\sub-phy001_ses-001_acq-difffwf2mmresex1b4000_dir-AP_run-1_part-mag_dwi.nii.gz',...
@@ -12,6 +13,7 @@ pause_dur_fn_list = {'resex_1\PauseDur.txt', 'resex_2\PauseDur.txt', 'resex_3\Pa
 
  
 %loop through the above and generate xps files
+xps_cell = cell(numel(nii_fn_list),1);
 for i = 1:numel(nii_fn_list)
     
     nii_fn = nii_fn_list{i};
@@ -20,6 +22,14 @@ for i = 1:numel(nii_fn_list)
     pause_dur_fn = pause_dur_fn_list{i};
 
     xps = resex_build_xps_from_gwf_txt(gwf_txt_A_fn, gwf_txt_B_fn, pause_dur_fn, nii_fn);
-
+    xps_cell{i} = xps;
 end
+
+%merge the xps files
+xps_merged = mdm_xps_merge(xps_cell);
+mdm_xps_check(xps_merged);
+%Save the merged xps with same name as the preprocessed and merged 4d nii
+preprocced_nii_fn = 'resex_1_2_3\preprocessed_merged_4d.nii.gz';
+xps_fn = mdm_xps_fn_from_nii_fn(preprocced_nii_fn);
+mdm_xps_save(xps_merged, xps_fn);
 
