@@ -40,27 +40,26 @@ t180 = zeros(ceil(pause_time/dt), 1);
 g = [gA; t180; gB];
 
 %compute q and b-value
-q = msf_const_gamma*cumsum(g)*dt;
-b = sum(q.^2)*dt;
-time = (0:(numel(q)-1))*dt;
-
-%compute q4
-
-xps.q4 = cell(xps.n, 1);
-xps.time = cell(xps.n, 1);
-for c = 1:xps.n
-    tmp_b = xps.b(c);
-    if tmp_b == 0; continue; end
-    tmp_q = q*sqrt(tmp_b/b);
-    xps.q4{c} = (1/tmp_b^2)*resex_mc_correlate(tmp_q'.^2, tmp_q'.^2, dt);
-    xps.time{c} = time;
-end
+% q = msf_const_gamma*cumsum(g)*dt;
+% b = sum(q.^2)*dt;
+% time = (0:(numel(q)-1))*dt;
+% %compute q4
+% 
+% xps.q4 = cell(xps.n, 1);
+% xps.time = cell(xps.n, 1);
+% for c = 1:xps.n
+%     tmp_b = xps.b(c);
+%     if tmp_b == 0; continue; end
+%     tmp_q = q*sqrt(tmp_b/b);
+%     xps.q4{c} = (1/tmp_b^2)*resex_mc_correlate(tmp_q'.^2, tmp_q'.^2, dt);
+%     xps.time{c} = time;
+% end
 
 %compute Gamma and Vomega
 [gam, vom] = resex_mc_protocol_to_gamma_vomega(g', dt);
 xps.Gamma = ones(xps.n,1)*gam;
 xps.Vomega = ones(xps.n,1)*vom;
-xps.dt = ones(xps.n,1)*dt;
+% xps.dt = ones(xps.n,1)*dt;
 % xps.time = repmat(time, xps.n, 1);
 
 %check
