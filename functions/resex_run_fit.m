@@ -17,7 +17,7 @@ I = mio_smooth_4d(I, 0.5);
 load(fullfile(nii_folder, strcat(nii_name, '_xps.mat')), 'xps')
 
 %add time to xps
-xps.t = 0:xps.dt(1):((size(xps.gwf,2)-1)*xps.dt(1));
+%xps.t = 0:xps.dt(1):((size(xps.gwf,2)-1)*xps.dt(1));
 
 % % %begin analysis
 
